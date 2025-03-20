@@ -2,9 +2,11 @@ import { Router } from "express";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../middlewares/validation";
 import { ProjectController } from "../controllers/ProjectController";
+import { TaskController } from "../controllers/TaskController";
 
 const router = Router();
 
+/* Routes for Projects */
 router.post(
   "/",
   body("projectName")
@@ -51,5 +53,8 @@ router.delete(
   handleInputErrors,
   ProjectController.deleteProject
 );
+
+/* Routes for Tasks */
+router.post("/:projectId/tasks", TaskController.createTask);
 
 export default router;
