@@ -76,4 +76,13 @@ router.get(
   TaskController.getProjectTasks
 );
 
+router.get(
+  "/:projectId/tasks/:taskId",
+  param("projectId").isMongoId().withMessage("ID de Proyecto no válido"),
+  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
+  handleInputErrors,
+  validateProjectExists,
+  TaskController.getTaskById
+);
+
 export default router;
