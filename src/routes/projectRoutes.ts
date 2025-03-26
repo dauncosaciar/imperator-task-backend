@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../middlewares/validation";
-import { validateProjectExists } from "../middlewares/project";
+import {
+  validateIdProject,
+  validateProjectExists
+} from "../middlewares/project";
 import { ProjectController } from "../controllers/ProjectController";
 import { TaskController } from "../controllers/TaskController";
 
@@ -56,32 +59,25 @@ router.delete(
 );
 
 /* Routes for Tasks */
+router.param("projectId", validateIdProject);
+router.param("projectId", validateProjectExists);
+
 router.post(
   "/:projectId/tasks",
-  param("projectId").isMongoId().withMessage("ID de Proyecto no válido"),
   body("name").notEmpty().withMessage("El Nombre de la Tarea es obligatorio"),
   body("description")
     .notEmpty()
     .withMessage("La Descripción de la Tarea es obligatoria"),
   handleInputErrors,
-  validateProjectExists,
   TaskController.createTask
 );
 
-router.get(
-  "/:projectId/tasks",
-  param("projectId").isMongoId().withMessage("ID de Proyecto no válido"),
-  handleInputErrors,
-  validateProjectExists,
-  TaskController.getProjectTasks
-);
+router.get("/:projectId/tasks", TaskController.getProjectTasks);
 
 router.get(
   "/:projectId/tasks/:taskId",
-  param("projectId").isMongoId().withMessage("ID de Proyecto no válido"),
   param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
   handleInputErrors,
-  validateProjectExists,
   TaskController.getTaskById
 );
 

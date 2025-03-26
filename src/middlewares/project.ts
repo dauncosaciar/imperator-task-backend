@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import type { Request, Response, NextFunction } from "express";
 import Project, { IProject } from "../models/Project";
 
@@ -6,6 +7,26 @@ declare global {
     interface Request {
       project: IProject;
     }
+  }
+}
+
+export async function validateIdProject(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { projectId } = req.params;
+
+    if (!Types.ObjectId.isValid(projectId)) {
+      const error = new Error("ID de Proyecto no válido");
+      res.status(400).json({ error: error.message });
+      return;
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error" });
   }
 }
 
