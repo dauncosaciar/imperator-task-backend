@@ -2,7 +2,11 @@ import { Router } from "express";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../middlewares/validation";
 import { projectExists, validateProjectId } from "../middlewares/project";
-import { taskExists, validateTaskId } from "../middlewares/task";
+import {
+  taskBelongsToProject,
+  taskExists,
+  validateTaskId
+} from "../middlewares/task";
 import { ProjectController } from "../controllers/ProjectController";
 import { TaskController } from "../controllers/TaskController";
 
@@ -74,6 +78,7 @@ router.get("/:projectId/tasks", TaskController.getProjectTasks);
 
 router.param("taskId", validateTaskId);
 router.param("taskId", taskExists);
+router.param("taskId", taskBelongsToProject);
 
 router.get("/:projectId/tasks/:taskId", TaskController.getTaskById);
 
