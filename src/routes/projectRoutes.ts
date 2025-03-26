@@ -81,4 +81,15 @@ router.get(
   TaskController.getTaskById
 );
 
+router.put(
+  "/:projectId/tasks/:taskId",
+  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
+  body("name").notEmpty().withMessage("El Nombre de la Tarea es obligatorio"),
+  body("description")
+    .notEmpty()
+    .withMessage("La Descripción de la Tarea es obligatoria"),
+  handleInputErrors,
+  TaskController.updateTask
+);
+
 export default router;
