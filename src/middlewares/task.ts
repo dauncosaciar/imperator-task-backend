@@ -1,25 +1,25 @@
 import { Types } from "mongoose";
 import type { Request, Response, NextFunction } from "express";
-import Project, { IProject } from "../models/Project";
+import Task, { ITask } from "../models/Task";
 
 declare global {
   namespace Express {
     interface Request {
-      project: IProject;
+      task: ITask;
     }
   }
 }
 
-export async function validateProjectId(
+export async function validateTaskId(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const { projectId } = req.params;
+    const { taskId } = req.params;
 
-    if (!Types.ObjectId.isValid(projectId)) {
-      const error = new Error("ID de Proyecto no válido");
+    if (!Types.ObjectId.isValid(taskId)) {
+      const error = new Error("ID de Tarea no válido");
       res.status(400).json({ error: error.message });
       return;
     }
@@ -30,22 +30,22 @@ export async function validateProjectId(
   }
 }
 
-export async function projectExists(
+export async function taskExists(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const { projectId } = req.params;
-    const project = await Project.findById(projectId);
+    const { taskId } = req.params;
+    const task = await Task.findById(taskId);
 
-    if (!project) {
-      const error = new Error("Proyecto no encontrado");
+    if (!task) {
+      const error = new Error("Tarea no encontrada");
       res.status(404).json({ error: error.message });
       return;
     }
 
-    req.project = project;
+    req.task = task;
     next();
   } catch (error) {
     res.status(500).json({ error: "Hubo un error" });

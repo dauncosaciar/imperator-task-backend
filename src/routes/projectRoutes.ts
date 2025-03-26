@@ -1,10 +1,8 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "../middlewares/validation";
-import {
-  validateIdProject,
-  validateProjectExists
-} from "../middlewares/project";
+import { projectExists, validateProjectId } from "../middlewares/project";
+import { taskExists, validateTaskId } from "../middlewares/task";
 import { ProjectController } from "../controllers/ProjectController";
 import { TaskController } from "../controllers/TaskController";
 
@@ -59,8 +57,8 @@ router.delete(
 );
 
 /* Routes for Tasks */
-router.param("projectId", validateIdProject);
-router.param("projectId", validateProjectExists);
+router.param("projectId", validateProjectId);
+router.param("projectId", projectExists);
 
 router.post(
   "/:projectId/tasks",
@@ -74,16 +72,13 @@ router.post(
 
 router.get("/:projectId/tasks", TaskController.getProjectTasks);
 
-router.get(
-  "/:projectId/tasks/:taskId",
-  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
-  handleInputErrors,
-  TaskController.getTaskById
-);
+router.param("taskId", validateTaskId);
+router.param("taskId", taskExists);
+
+router.get("/:projectId/tasks/:taskId", TaskController.getTaskById);
 
 router.put(
   "/:projectId/tasks/:taskId",
-  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
   body("name").notEmpty().withMessage("El Nombre de la Tarea es obligatorio"),
   body("description")
     .notEmpty()
@@ -92,16 +87,10 @@ router.put(
   TaskController.updateTask
 );
 
-router.delete(
-  "/:projectId/tasks/:taskId",
-  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
-  handleInputErrors,
-  TaskController.deleteTask
-);
+router.delete("/:projectId/tasks/:taskId", TaskController.deleteTask);
 
 router.post(
   "/:projectId/tasks/:taskId/status",
-  param("taskId").isMongoId().withMessage("ID de Tarea no válido"),
   body("status").notEmpty().withMessage("El Estado de la Tarea es obligatorio"),
   handleInputErrors,
   TaskController.updateStatus
