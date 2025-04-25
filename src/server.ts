@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import morgan from "morgan";
 import { connectDB } from "./config/db";
 import { corsConfig } from "./config/cors";
 import projectRoutes from "./routes/projectRoutes";
@@ -16,6 +17,9 @@ const app = express();
 
 // Enable CORS
 app.use(cors(corsConfig));
+
+// Logging
+app.use(morgan("dev"));
 
 // Allows receiving data in JSON in req.body
 app.use(express.json());
