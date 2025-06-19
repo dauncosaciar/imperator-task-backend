@@ -17,7 +17,7 @@ export interface ITask extends Document {
   status: TaskStatus;
 }
 
-export const TaskSchema: Schema = new Schema(
+const taskSchema: Schema = new Schema(
   {
     name: {
       type: String,
@@ -42,5 +42,5 @@ export const TaskSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-const Task = mongoose.model<ITask>("Task", TaskSchema);
+const Task = mongoose.model<ITask>("Task", taskSchema);
 export default Task;

@@ -8,7 +8,7 @@ export interface IProject extends Document {
   tasks: PopulatedDoc<ITask & Document>[];
 }
 
-const ProjectSchema: Schema = new Schema(
+const projectSchema: Schema = new Schema(
   {
     projectName: {
       type: String,
@@ -35,5 +35,5 @@ const ProjectSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-const Project = mongoose.model<IProject>("Project", ProjectSchema);
+const Project = mongoose.model<IProject>("Project", projectSchema);
 export default Project;
