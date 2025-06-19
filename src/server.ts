@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { connectDB } from "./config/db";
 import { corsConfig } from "./config/cors";
+import authRoutes from "./routes/authRoutes";
 import projectRoutes from "./routes/projectRoutes";
 
 // Allow reading of .env files
@@ -25,6 +26,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Api routes
+app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 
 export default app;
