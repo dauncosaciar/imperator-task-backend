@@ -3,7 +3,7 @@ import User from "../models/User";
 import Token from "../models/Token";
 import { hashPassword } from "../utils/auth";
 import { generate6DigitToken } from "../utils/token";
-import { transporter } from "../config/nodemailer";
+import { AuthEmail } from "../emails/AuthEmail";
 
 export class AuthController {
   static createAccount = async (req: Request, res: Response) => {
@@ -29,18 +29,17 @@ export class AuthController {
       token.user = user.id;
 
       // Send account confirmation email
-      await transporter.sendMail({
-        from: "ImperatorTask <admin@imperatortask.com>",
-        to: user.email,
-        subject: "ImperatorTask: Confirma tu cuenta",
-        text: "ImperatorTask: Confirma tu cuenta",
-        html: `<p>Probando email.</p>`
+      AuthEmail.sendConfirmationEmail({
+        email: user.email,
+        name: user.name,
+        lastName: user.lastName,
+        token: token.token
       });
 
       await Promise.allSettled([user.save(), token.save()]);
       res.send("Cuenta creada. Revisa tu email para confirmarla");
     } catch (error) {
-      res.status(500).json({ error: "Hubo un error " });
+      res.status(500).json({ error: "Hubo un error" });
     }
   };
 }
