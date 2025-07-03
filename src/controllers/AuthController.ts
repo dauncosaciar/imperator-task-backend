@@ -59,7 +59,7 @@ export class AuthController {
       user.confirmed = true;
 
       await Promise.allSettled([user.save(), tokenExists.deleteOne()]);
-      res.send("Cuenta confirmada correctamente");
+      res.send("Cuenta confirmada correctamente. Ya puedes iniciar sesión");
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
