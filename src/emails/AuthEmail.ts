@@ -26,4 +26,23 @@ export class AuthEmail {
 
     console.log("Mensaje enviado:", info.messageId);
   };
+
+  static sendPasswordResetToken = async (user: IEmail) => {
+    const info = await transporter.sendMail({
+      from: "ImperatorTask <admin@imperatortask.com>",
+      to: user.email,
+      subject: "ImperatorTask: Reestablece tu contraseña",
+      text: "ImperatorTask: Reestablece tu contraseña",
+      html: `
+        <p>¡Hola, <b>${user.name} ${user.lastName}</b>!</p>
+        <p>Has solicitado reestablecer la contraseña de tu cuenta en <b><i>ImperatorTask</i></b>.</p>
+        <p>Para hacerlo, visita el siguiente enlace:</p>
+        <a href="${process.env.FRONTEND_URL}/auth/new-password">Reestablecer Contraseña</a>
+        <p>E ingresa el código: <b>${user.token}</b></p>
+        <p>Este código expira en 5 minutos.</p>
+      `
+    });
+
+    console.log("Mensaje enviado:", info.messageId);
+  };
 }

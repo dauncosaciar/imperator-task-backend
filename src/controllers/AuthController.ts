@@ -153,4 +153,37 @@ export class AuthController {
       res.status(500).json({ error: "Hubo un error" });
     }
   };
+
+  static forgotPassword = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      // Check if user exists
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        const error = new Error("El Usuario con ese email no está registrado");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      // Generate password reset token
+      const token = new Token();
+      token.token = generate6DigitToken();
+      token.user = user.id;
+      await token.save();
+
+      // Send password reset token email
+      AuthEmail.sendPasswordResetToken({
+        email: user.email,
+        name: user.name,
+        lastName: user.lastName,
+        token: token.token
+      });
+
+      res.send("Revisa tu email para instrucciones");
+    } catch (error) {
+      res.status(500).json({ error: "Hubo un error" });
+    }
+  };
 }
