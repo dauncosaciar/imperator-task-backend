@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { AuthController } from "../controllers/AuthController";
 import { handleInputErrors } from "../middlewares/validation";
 
@@ -58,6 +58,24 @@ router.post(
   body("token").notEmpty().withMessage("El token no puede ir vacío"),
   handleInputErrors,
   AuthController.validateToken
+);
+
+router.post(
+  "/update-password/:token",
+  param("token")
+    .isNumeric()
+    .withMessage("Token no válido. Sólo debe contener números"),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("La contraseña es muy corta, mínimo 8 caracteres"),
+  body("passwordConfirmation").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error("Las contraseñas no son iguales");
+    }
+    return true;
+  }),
+  handleInputErrors,
+  AuthController.updatePasswordWithToken
 );
 
 export default router;
