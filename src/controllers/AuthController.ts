@@ -222,7 +222,7 @@ export class AuthController {
       user.password = await hashPassword(password);
 
       await Promise.allSettled([user.save(), tokenExists.deleteOne()]);
-      res.send("Tu contraseña se modificó correctamente");
+      res.send("Tu contraseña se modificó correctamente. Ya puedes iniciar sesión");
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
