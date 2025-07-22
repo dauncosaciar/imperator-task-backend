@@ -109,6 +109,7 @@ export class AuthController {
         return;
       }
 
+      // Generate JWT and send it to frontend
       const token = generateJWT({ id: user.id });
       res.send(token);
     } catch (error) {
