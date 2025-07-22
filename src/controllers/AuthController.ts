@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import User from "../models/User";
 import Token from "../models/Token";
 import { checkPassword, hashPassword } from "../utils/auth";
+import { generateJWT } from "../utils/jwt";
 import { generate6DigitToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
 
@@ -108,7 +109,8 @@ export class AuthController {
         return;
       }
 
-      res.send("Autenticado con éxito");
+      const token = generateJWT({ id: user.id });
+      res.send(token);
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
@@ -222,7 +224,9 @@ export class AuthController {
       user.password = await hashPassword(password);
 
       await Promise.allSettled([user.save(), tokenExists.deleteOne()]);
-      res.send("Tu contraseña se modificó correctamente. Ya puedes iniciar sesión");
+      res.send(
+        "Tu contraseña se modificó correctamente. Ya puedes iniciar sesión"
+      );
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
