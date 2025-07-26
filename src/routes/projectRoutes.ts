@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
+import { authenticate } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/validation";
 import { projectExists, validateProjectId } from "../middlewares/project";
 import {
@@ -15,6 +16,7 @@ const router = Router();
 /* Routes for Projects */
 router.post(
   "/",
+  authenticate,
   body("projectName")
     .notEmpty()
     .withMessage("El Nombre del Proyecto es obligatorio"),
