@@ -13,10 +13,11 @@ import { TaskController } from "../controllers/TaskController";
 
 const router = Router();
 
+router.use(authenticate);
+
 /* Routes for Projects */
 router.post(
   "/",
-  authenticate,
   body("projectName")
     .notEmpty()
     .withMessage("El Nombre del Proyecto es obligatorio"),
@@ -30,7 +31,7 @@ router.post(
   ProjectController.createProject
 );
 
-router.get("/", authenticate, ProjectController.getAllProjects);
+router.get("/", ProjectController.getAllProjects);
 
 router.get(
   "/:projectId",
