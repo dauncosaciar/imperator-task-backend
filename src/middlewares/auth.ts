@@ -35,6 +35,7 @@ export async function authenticate(
 
       if (user) {
         req.user = user;
+        next();
       } else {
         res.status(500).json({ error: "Token no válido" });
         return;
@@ -44,6 +45,4 @@ export async function authenticate(
     res.status(500).json({ error: "Token no válido" });
     return;
   }
-
-  next();
 }
