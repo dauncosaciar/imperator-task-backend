@@ -113,4 +113,11 @@ router.post(
   TeamController.findMemberByEmail
 );
 
+router.post(
+  "/:projectId/team",
+  body("id").isMongoId().withMessage("ID de Usuario no válido"),
+  handleInputErrors,
+  TeamController.addMemberById
+);
+
 export default router;
