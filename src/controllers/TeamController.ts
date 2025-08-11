@@ -54,4 +54,22 @@ export class TeamController {
 
     res.send("Usuario agregado correctamente");
   };
+
+  static removeMemberById = async (req: Request, res: Response) => {
+    const { id } = req.body;
+
+    if (!req.project.team.some(member => member.toString() === id.toString())) {
+      const error = new Error("El Usuario no existe en el Proyecto");
+      res.status(404).json({ error: error.message });
+      return;
+    }
+
+    req.project.team = req.project.team.filter(
+      member => member.toString() !== id.toString()
+    );
+
+    await req.project.save();
+
+    res.send("Usuario removido correctamente");
+  };
 }
