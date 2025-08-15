@@ -26,7 +26,7 @@ export class TeamController {
       select: "_id name lastName email"
     });
 
-    res.json(project.team);
+    res.json({ projectName: project.projectName, team: project.team });
   };
 
   static addMemberById = async (req: Request, res: Response) => {
