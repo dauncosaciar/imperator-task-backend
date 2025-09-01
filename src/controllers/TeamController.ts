@@ -43,7 +43,7 @@ export class TeamController {
 
     if (req.project.manager.toString() === user.id.toString()) {
       const error = new Error(
-        "El Usuario no puede agregarse como Colaborador del Proyecto porque ya su Mánager"
+        "El Usuario no puede agregarse como Colaborador del Proyecto porque ya es su Mánager"
       );
       res.status(409).json({ error: error.message });
       return;
