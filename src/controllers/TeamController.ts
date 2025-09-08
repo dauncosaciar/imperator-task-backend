@@ -30,10 +30,10 @@ export class TeamController {
   };
 
   static addMemberById = async (req: Request, res: Response) => {
-    const { id } = req.body;
+    const { userId } = req.body;
 
     // Find user
-    const user = await User.findById(id).select("_id");
+    const user = await User.findById(userId).select("_id");
 
     if (!user) {
       const error = new Error("Usuario no encontrado");
