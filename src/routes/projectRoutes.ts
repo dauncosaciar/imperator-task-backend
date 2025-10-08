@@ -4,6 +4,7 @@ import { authenticate } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/validation";
 import { projectExists, validateProjectId } from "../middlewares/project";
 import {
+  hasAuthorization,
   taskBelongsToProject,
   taskExists,
   validateTaskId
@@ -70,6 +71,7 @@ router.param("projectId", projectExists);
 
 router.post(
   "/:projectId/tasks",
+  hasAuthorization,
   body("name").notEmpty().withMessage("El Nombre de la Tarea es obligatorio"),
   body("description")
     .notEmpty()
@@ -88,6 +90,7 @@ router.get("/:projectId/tasks/:taskId", TaskController.getTaskById);
 
 router.put(
   "/:projectId/tasks/:taskId",
+  hasAuthorization,
   body("name").notEmpty().withMessage("El Nombre de la Tarea es obligatorio"),
   body("description")
     .notEmpty()
@@ -96,7 +99,11 @@ router.put(
   TaskController.updateTask
 );
 
-router.delete("/:projectId/tasks/:taskId", TaskController.deleteTask);
+router.delete(
+  "/:projectId/tasks/:taskId",
+  hasAuthorization,
+  TaskController.deleteTask
+);
 
 router.post(
   "/:projectId/tasks/:taskId/status",
