@@ -72,7 +72,7 @@ export async function hasAuthorization(
   next: NextFunction
 ) {
   if (req.user.id.toString() !== req.project.manager.toString()) {
-    const error = new Error("Acción no válida");
+    const error = new Error("Acción no válida para Colaboradores");
     res.status(400).json({ error: error.message });
     return;
   }
