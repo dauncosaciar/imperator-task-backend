@@ -61,6 +61,13 @@ export class TaskController {
     try {
       const { status } = req.body;
       req.task.status = status;
+
+      if (status === "pending") {
+        req.task.updatedBy = null;
+      } else {
+        req.task.updatedBy = req.user.id;
+      }
+
       await req.task.save();
       res.send("Tarea actualizada correctamente");
     } catch (error) {

@@ -15,6 +15,7 @@ export interface ITask extends Document {
   description: string;
   project: Types.ObjectId;
   status: TaskStatus;
+  updatedBy: Types.ObjectId;
 }
 
 const taskSchema: Schema = new Schema(
@@ -37,6 +38,11 @@ const taskSchema: Schema = new Schema(
       type: String,
       enum: Object.values(taskStatus),
       default: taskStatus.PENDING
+    },
+    updatedBy: {
+      type: Types.ObjectId,
+      ref: "User",
+      default: null
     }
   },
   { timestamps: true }
