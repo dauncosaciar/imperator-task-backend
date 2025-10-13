@@ -28,7 +28,7 @@ export class TaskController {
   static getTaskById = async (req: Request, res: Response) => {
     try {
       const task = await Task.findById(req.task.id).populate({
-        path: "updatedBy",
+        path: "updatedBy.user",
         select: "_id name lastName email"
       });
 
