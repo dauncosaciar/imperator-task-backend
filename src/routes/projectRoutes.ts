@@ -149,4 +149,11 @@ router.post(
 
 router.get("/:projectId/tasks/:taskId/notes", NoteController.getTaskNotes);
 
+router.delete(
+  "/:projectId/tasks/:taskId/notes/:noteId",
+  param("noteId").isMongoId().withMessage("ID de Nota no válido"),
+  handleInputErrors,
+  NoteController.deleteNote
+);
+
 export default router;
