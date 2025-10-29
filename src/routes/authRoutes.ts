@@ -81,4 +81,15 @@ router.post(
 
 router.get("/user", authenticate, AuthController.getUser);
 
+// Routes for Profiles
+router.put(
+  "/profile",
+  authenticate,
+  body("name").notEmpty().withMessage("El nombre no puede ir vacío"),
+  body("lastName").notEmpty().withMessage("El apellido no puede ir vacío"),
+  body("email").isEmail().withMessage("Email no válido"),
+  handleInputErrors,
+  AuthController.updateProfile
+);
+
 export default router;
