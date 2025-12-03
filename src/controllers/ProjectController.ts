@@ -55,29 +55,12 @@ export class ProjectController {
   };
 
   static updateProject = async (req: Request, res: Response) => {
-    const { projectId } = req.params;
-
     try {
-      const project = await Project.findById(projectId);
+      req.project.clientName = req.body.clientName;
+      req.project.projectName = req.body.projectName;
+      req.project.description = req.body.description;
 
-      if (!project) {
-        const error = new Error("Proyecto no encontrado");
-        res.status(404).json({ error: error.message });
-        return;
-      }
-
-      if (project.manager.toString() !== req.user.id.toString()) {
-        const error = new Error(
-          "Acción no válida. Sólo el Manager puede actualizar un Proyecto"
-        );
-        res.status(401).json({ error: error.message });
-        return;
-      }
-
-      project.clientName = req.body.clientName;
-      project.projectName = req.body.projectName;
-      project.description = req.body.description;
-      await project.save();
+      await req.project.save();
       res.send("Proyecto actualizado correctamente");
     } catch (error) {
       console.log(error);
@@ -85,26 +68,8 @@ export class ProjectController {
   };
 
   static deleteProject = async (req: Request, res: Response) => {
-    const { projectId } = req.params;
-
     try {
-      const project = await Project.findById(projectId);
-
-      if (!project) {
-        const error = new Error("Proyecto no encontrado");
-        res.status(404).json({ error: error.message });
-        return;
-      }
-
-      if (project.manager.toString() !== req.user.id.toString()) {
-        const error = new Error(
-          "Acción no válida. Sólo el Manager puede eliminar un Proyecto"
-        );
-        res.status(401).json({ error: error.message });
-        return;
-      }
-
-      await project.deleteOne();
+      await req.project.deleteOne();
       res.send("Proyecto eliminado correctamente");
     } catch (error) {
       console.log(error);
