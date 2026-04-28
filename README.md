@@ -26,6 +26,7 @@
         <li><a href="#prerrequisitos">Prerrequisitos</a></li>
         <li><a href="#instalación-del-proyecto-local">Instalación del Proyecto local</a></li>
         <li><a href="#endpoints-de-la-api">Endpoints de la API</a></li>
+        <li><a href="#archivos-json-de-endpoints-y-ambiente">Archivos JSON de endpoints y ambiente</a></li>
       </ul>
     </li>
   </ol>
@@ -982,6 +983,12 @@ Perfil actualizado correctamente
 ```txt
 Tu contraseña se modificó correctamente
 ```
+
+### Archivos JSON de endpoints y ambiente
+
+En la raíz de este repositorio se adjuntan los archivos `.json` de Postman referentes a las **colecciones** de endpoints de la api (`ImperatorTask.postman_collection.json`) y del **environment** donde están las variables se utilizan en todas las colecciones (`ImperatorTask.postman_environment.json`).
+
+Puedes abrir Postman e importar estos archivos para tener todas las colecciones y las variables del environment para así poder interactuar y probar la api.
 
 <p style="text-align: right;">[<a href="#readme-top">volver hacia arriba</a>]</p>
 
