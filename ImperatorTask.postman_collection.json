@@ -1,0 +1,982 @@
+{
+  "info": {
+    "_postman_id": "0fe91fe6-e21a-447c-bcf9-353e8b7249fa",
+    "name": "ImperatorTask",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24415947"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Create Account",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"name\": \"John\",\r\n\t\"lastName\": \"Smith\",\r\n\t\"email\": \"john.smith@imperatortask.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"passwordConfirmation\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/create-account",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "create-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Account",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"token\": \"759308\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/confirm-account",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "confirm-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"email\": \"john.smith@imperatortask.com\",\r\n\t\"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/login",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Request Confirmation Code",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"email\": \"john.smith@imperatortask.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/request-code",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "request-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"email\": \"john.smith@imperatortask.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/forgot-password",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"token\": \"438755\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/validate-token",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "validate-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Password With Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"password\": \"12345678\",\r\n\t\"passwordConfirmation\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/update-password/799153",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "update-password",
+                "799153"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Authenticated User",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \t\"password\": \"12345678\",\r\n \t\"passwordConfirmation\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/user",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/check-password",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "check-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Create Project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"projectName\": \"Sistema de Ventas\",\r\n  \"clientName\": \"John Smith Dash\",\r\n  \"description\": \"Punto de Venta hecho en Java con React.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Projects",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"projectName\": \"Sistema de Ventas\",\r\n  \"clientName\": \"John Smith Dash\",\r\n  \"description\": \"Punto de Venta hecho en Java con React.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teams",
+      "item": [
+        {
+          "name": "Find Member By Email",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"email\": \"anita.johnson@imperatortask.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/team/find",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "team",
+                "find"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project Team",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/team",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "team"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Member By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"userId\": \"68869fa7a1192a9e62f1360c\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/team",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "team"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Member By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/team/68869fa7a1192a9e62f1360c",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "team",
+                "68869fa7a1192a9e62f1360c"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"name\": \"Nuevo nombre\",\r\n  \"description\": \"Nueva descripción\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project Tasks",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/69948d22eb7ed776b73f35af",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "69948d22eb7ed776b73f35af"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"name\": \"Nombre actualizado\",\r\n  \"description\": \"Descripción actualizada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/69948d22eb7ed776b73f35af",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "69948d22eb7ed776b73f35af"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/69948d22eb7ed776b73f35af",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "69948d22eb7ed776b73f35af"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"status\": \"inProgress\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/6994941aeb7ed776b73f35c8/status",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "6994941aeb7ed776b73f35c8",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notes",
+      "item": [
+        {
+          "name": "Create Note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"content\": \"Este es un contenido de prueba.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/6994941aeb7ed776b73f35c8/notes",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "6994941aeb7ed776b73f35c8",
+                "notes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task Notes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/6994941aeb7ed776b73f35c8/notes",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "6994941aeb7ed776b73f35c8",
+                "notes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/projects/699375aa15817d95ecf77633/tasks/6994941aeb7ed776b73f35c8/notes/6994a488eb7ed776b73f35e4",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "projects",
+                "699375aa15817d95ecf77633",
+                "tasks",
+                "6994941aeb7ed776b73f35c8",
+                "notes",
+                "6994a488eb7ed776b73f35e4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"name\": \"John M.\",\r\n\t\"lastName\": \"Smith\",\r\n\t\"email\": \"john.smith@imperatortask.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/profile",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Current User Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{AUTH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"currentPassword\": \"12345678\",\r\n\t\"password\": \"87654321\",\r\n\t\"passwordConfirmation\": \"87654321\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_URL}}/auth/update-password",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "auth",
+                "update-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
